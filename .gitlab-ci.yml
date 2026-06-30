@@ -1,0 +1,36 @@
+variables:
+  NEXUS_IQ_APPLICATION_ID: sonatype-demo-huggingface-GL
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  image: python:3.11-slim
+  script:
+    - mkdir -p ~/.config/pip
+    - |
+      cat > ~/.config/pip/pip.conf << EOF
+      [global]
+      index-url = https://${NEXUS_USER}:${NEXUS_TOKEN}@rob-repo.ngrok.io/repository/demo-pypi-proxy/simple/
+      trusted-host = rob-repo.ngrok.io
+      EOF
+    - python -m venv venv
+    - . venv/bin/activate
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+    - pip download -r requirements.txt -d ./py-deps
+  artifacts:
+    paths:
+      - requirements.txt
+      - py-deps/
+
+include:
+  - component: $CI_SERVER_FQDN/sonatype-integrations/components/evaluate@main
+    inputs:
+      application-id: ${NEXUS_IQ_APPLICATION_ID}
+      scan-targets:
+        - py-deps/
+      stage: build
+      ci-needs: [build]

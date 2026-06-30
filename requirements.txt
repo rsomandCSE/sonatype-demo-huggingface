@@ -1,0 +1,9 @@
+# Sonatype Demo App - Hugging Face Transformers
+# Intentionally vulnerable versions for demo purposes
+
+transformers==4.30.0
+torch==2.0.0
+tokenizers==0.13.3
+huggingface-hub==0.14.1
+numpy==1.24.0
+pillow==9.3.0
