@@ -3,7 +3,7 @@
 # Note: torch removed due to size (2GB+) causing ngrok timeouts in CI
 
 transformers==4.30.0
-tokenizers==0.13.3
+tokenizers==0.23.1
 huggingface-hub==0.14.1
 numpy==1.24.0
 pillow==9.3.0
