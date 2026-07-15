@@ -2,7 +2,7 @@
 # Intentionally vulnerable versions for demo purposes
 # Note: torch removed due to size (2GB+) causing ngrok timeouts in CI
 
-transformers==4.30.0
+transformers==5.14.0
 tokenizers==0.13.3
 huggingface-hub==0.14.1
 numpy==1.24.0
